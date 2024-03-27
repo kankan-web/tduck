@@ -43,6 +43,7 @@ module.exports = {
 		"prettier/prettier": "error",
 		"arrow-body-style": "off",
 		"prefer-arrow-callback": "off",
-		"@typescript-eslint/no-unused-vars": "off"
+		"@typescript-eslint/no-unused-vars": "off",
+		"@typescript-eslint/no-explicit-any": "off"
 	}
 };
