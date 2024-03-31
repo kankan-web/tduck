@@ -1,6 +1,11 @@
 import { useSearchParams } from "react-router-dom";
 import { getQuestionListService } from "../servers/question";
-import { LIST_SEARCH_PARAM_KEY } from "../constant";
+import {
+	LIST_SEARCH_PARAM_KEY,
+	LIST_PAGE_PARAM_KEY,
+	LIST_PAGE_SIZE_PARAM_KEY,
+	LIST_PAGE_SIZE
+} from "../constant";
 import { useRequest } from "ahooks";
 type OptionType = {
 	isStar: boolean;
@@ -12,7 +17,18 @@ function useLoadQuestionList(opt: Partial<OptionType> = {}) {
 	const { data, loading, error } = useRequest(
 		async () => {
 			const keyword = searchParams.get(LIST_SEARCH_PARAM_KEY) || "";
-			const data = await getQuestionListService({ keyword, isDeleted, isStar });
+			const page = parseInt(searchParams.get(LIST_PAGE_PARAM_KEY) || "") || 1;
+			const pageSize =
+				parseInt(searchParams.get(LIST_PAGE_SIZE_PARAM_KEY) || "") ||
+				LIST_PAGE_SIZE;
+
+			const data = await getQuestionListService({
+				keyword,
+				isDeleted,
+				isStar,
+				page,
+				pageSize
+			});
 			return data;
 		},
 		{

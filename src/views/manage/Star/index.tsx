@@ -4,7 +4,7 @@ import { Typography, Empty, Spin } from "antd";
 import styles from "../common.module.scss";
 import QuestionCard from "../../../components/QuestionCard";
 import useLoadQuestionList from "../../../hooks/useLoadQuestionList";
-import { ListSearch } from "../../../components/index";
+import { ListSearch, ListPage } from "../../../components/index";
 const { Title } = Typography;
 const Star: FC = () => {
 	useTitle("阿蛋问卷 - 星标问卷");
@@ -35,7 +35,9 @@ const Star: FC = () => {
 						return <QuestionCard key={_id} {...q} />;
 					})}
 			</div>
-			<div className={styles.footer}>分页</div>
+			<div className={styles.footer}>
+				<ListPage total={total} />
+			</div>
 		</>
 	);
 };

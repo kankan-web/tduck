@@ -20,7 +20,9 @@ const MainLayout: FC = () => {
 			<Content className={styles.main}>
 				<Outlet />
 			</Content>
-			<Footer className={styles.footer}>问卷系统 &copy; 2024- present. Created by 阿娟蛋</Footer>
+			<Footer className={styles.footer}>
+				问卷系统 &copy; 2024- present. Created by 阿娟蛋
+			</Footer>
 		</Layout>
 	);
 };
