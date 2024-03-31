@@ -1,16 +1,28 @@
 import React, { FC, useState } from "react";
 import { useTitle } from "ahooks";
-import { Typography, Empty, Table, Tag, Button, Space, Modal } from "antd";
+import {
+	Typography,
+	Empty,
+	Table,
+	Tag,
+	Button,
+	Space,
+	Modal,
+	Spin
+} from "antd";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
 import styles from "../common.module.scss";
+import useLoadQuestionList from "../../../hooks/useLoadQuestionList";
+import { ListSearch } from "../../../components/index";
+
 const { Title } = Typography;
 const { confirm } = Modal;
+
 const Trash: FC = () => {
 	useTitle("阿蛋问卷 - 回收站");
-	const [questionList, setQuestionList] = useState([
-		{ _id: "q1", title: "问卷1", isPublished: false, isStar: true, answerCount: 3, createdAt: "3月10日 13:23" },
-		{ _id: "q3", title: "问卷3", isPublished: true, isStar: true, answerCount: 3, createdAt: "3月12日 13:23" }
-	]);
+	const { data = {}, loading } = useLoadQuestionList({ isDeleted: true });
+	const { list = [], total = 0 } = data;
+
 	const [selectedIds, setSelectedIds] = useState<string[]>([]);
 	const TableColumns = [
 		{
@@ -22,7 +34,11 @@ const Trash: FC = () => {
 			title: "是否发布",
 			dataIndex: "isPublished",
 			render: (isPublished: boolean) => {
-				return isPublished ? <Tag color="processing">已发布</Tag> : <Tag>未发布</Tag>;
+				return isPublished ? (
+					<Tag color="processing">已发布</Tag>
+				) : (
+					<Tag>未发布</Tag>
+				);
 			}
 		},
 		{
@@ -60,7 +76,7 @@ const Trash: FC = () => {
 				</Space>
 			</div>
 			<Table
-				dataSource={questionList}
+				dataSource={list}
 				columns={TableColumns}
 				rowKey={q => q._id}
 				pagination={false}
@@ -79,12 +95,19 @@ const Trash: FC = () => {
 				<div className={styles.left}>
 					<Title level={3}>回收站</Title>
 				</div>
-				<div className={styles.right}>搜索</div>
+				<div className={styles.right}>
+					<ListSearch />
+				</div>
 			</div>
 			<div className={styles.content}>
+				{loading && (
+					<div style={{ textAlign: "center", paddingTop: "100px" }}>
+						<Spin />
+					</div>
+				)}
 				{/* 问卷列表 */}
-				{questionList.length === 0 && <Empty description="暂无数据" />}
-				{questionList.length > 0 && tableElement}
+				{!loading && list.length === 0 && <Empty description="暂无数据" />}
+				{!loading && list.length > 0 && tableElement}
 			</div>
 			<div className={styles.footer}>分页</div>
 		</>

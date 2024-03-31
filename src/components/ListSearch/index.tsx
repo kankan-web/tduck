@@ -8,10 +8,10 @@ const ListSearch: FC = () => {
 	const { pathname } = useLocation();
 	const [value, setValue] = useState("");
 	const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-		console.log(event);
+		setValue(event.target.value);
 	};
 	//获取url参赛，并设置到input vule
-	//#MARK:有点不太理解为什么要这样取值
+	//MARK:有点不太理解为什么要这样取值，保证刷新时也可以保证搜索框的值
 	const [searchParams] = useSearchParams();
 	useEffect(() => {
 		const curValue = searchParams.get(LIST_SEARCH_PARAM_KEY) || "";
