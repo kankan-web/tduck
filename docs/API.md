@@ -1,3 +1,36 @@
+# API设计
+
+## 用户功能
+
+### 获取用户信息
+
+- method:`get`
+- path:`/api/user/info`
+- response:`{code,data:{...}`或`{code:"E001",msg:'xxx'}`
+
+### 注册
+
+- method:`post`
+- path:`/api/user/register`
+- request body:`{username,password,email}`
+- response:`{code}`
+
+### 登录
+
+- method:`post`
+- path:`/api/user/login`
+- request body:`{username,password}`
+- response:`{code,data:{token}}`--**JWT**使用Token
+
+## 问卷功能
+
+### 创建问卷
+
+- method:`post`
+- path:`/api/question`
+- request body:`{title,isStar,isPublished,isExpired,expiredAt,questions}`
+- response:`{code,data:{_id,title}}`
+
 ### 更新问卷信息
 
 - method:`patch`

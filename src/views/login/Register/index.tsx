@@ -1,13 +1,28 @@
 import React, { FC } from "react";
-import { Space, Typography, Form, Input, Button } from "antd";
+import { Space, Typography, Form, Input, Button, message } from "antd";
 import { Link } from "react-router-dom";
 import { UserAddOutlined } from "@ant-design/icons";
 import styles from "./index.module.scss";
 import { LOGIN_PATHNAME } from "../../../routers";
+import { useRequest } from "ahooks";
+import { registerService } from "../../../servers/user";
 const { Title } = Typography;
 const Register: FC = () => {
+	const { run } = useRequest(
+		async values => {
+			const { username, password, nickname } = values;
+			await registerService(username, password, nickname);
+		},
+		{
+			manual: true,
+			onSuccess() {
+				message.success("注册成功");
+			}
+		}
+	);
+
 	const onFinsh = (value: any) => {
-		console.log("上传到数据是", value);
+		run(value); //调用ajax
 	};
 	return (
 		<div className={styles.container}>
