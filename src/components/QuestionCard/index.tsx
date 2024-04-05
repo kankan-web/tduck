@@ -11,7 +11,10 @@ import {
 } from "@ant-design/icons";
 import styles from "./index.module.scss";
 import { useRequest } from "ahooks";
-import { updateQuestionService } from "../../servers/question";
+import {
+	updateQuestionService,
+	duplicateQuestionService
+} from "../../servers/question";
 type PropsType = {
 	_id: string; // 服务端 mongodb ，自动，_id 不重复
 	title: string;
@@ -36,12 +39,22 @@ const QuestionCard: FC<PropsType> = (props: PropsType) => {
 			manual: true,
 			onSuccess() {
 				setIsStarState(!isStarState); //更新星标
+				message.success("更新成功");
 			}
 		}
 	);
-	const duplicate = () => {
-		message.success("执行复制");
-	};
+	//复制问卷
+	const { loading: duplicateLoading, run: duplicate } = useRequest(
+		async () => await duplicateQuestionService(_id),
+		{
+			manual: true,
+			onSuccess(res: any) {
+				message.success("复制成功");
+				nav(`/question/edit/${res._id}`); //跳转到问卷
+			}
+		}
+	);
+
 	const del = () => {
 		confirm({
 			title: "确定删除问卷？",
@@ -118,7 +131,12 @@ const QuestionCard: FC<PropsType> = (props: PropsType) => {
 							okText="确定"
 							cancelText="取消"
 						>
-							<Button type="text" icon={<CopyOutlined />} size="small">
+							<Button
+								type="text"
+								icon={<CopyOutlined />}
+								size="small"
+								disabled={duplicateLoading}
+							>
 								复制
 							</Button>
 						</Popconfirm>
