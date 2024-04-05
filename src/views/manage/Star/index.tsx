@@ -8,8 +8,23 @@ import { ListSearch, ListPage } from "../../../components/index";
 const { Title } = Typography;
 const Star: FC = () => {
 	useTitle("阿蛋问卷 - 星标问卷");
+	//方法二：使用use Request
+	// const { data = {}, loading } = useRequest(getQuestionListService);
+	//方法三：使用自定义hooks
 	const { data = {}, loading } = useLoadQuestionList({ isStar: true });
 	const { list = [], total = 0 } = data;
+	// 方法一：代码直接书写
+	// const [questionList, setQuestionList] = useState([]);
+	// const [total, setTotal] = useState(0);
+	// useEffect(() => {
+	// 	async function load() {
+	// 		const data = await getQuestionListService();
+	// 		const { list = [], total = 0 } = data;
+	// 		setQuestionList(list);
+	// 		setTotal(total);
+	// 	}
+	// 	load();
+	// }, []);
 	return (
 		<>
 			<div className={styles.header}>

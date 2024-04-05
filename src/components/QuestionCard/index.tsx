@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button, Space, Divider, Tag, Popconfirm, Modal, message } from "antd";
 import {
@@ -10,6 +10,8 @@ import {
 	ExclamationCircleOutlined
 } from "@ant-design/icons";
 import styles from "./index.module.scss";
+import { useRequest } from "ahooks";
+import { updateQuestionService } from "../../servers/question";
 type PropsType = {
 	_id: string; // 服务端 mongodb ，自动，_id 不重复
 	title: string;
@@ -22,6 +24,21 @@ const { confirm } = Modal;
 const QuestionCard: FC<PropsType> = (props: PropsType) => {
 	const nav = useNavigate();
 	const { _id, title, createdAt, answerCount, isPublished, isStar } = props;
+	//修改标星
+	const [isStarState, setIsStarState] = useState(isStar);
+	const { loading: ChangeStartLoading, run: changeStar } = useRequest(
+		async () => {
+			await updateQuestionService(_id, {
+				isStar: !isStarState
+			});
+		},
+		{
+			manual: true,
+			onSuccess() {
+				setIsStarState(!isStarState); //更新星标
+			}
+		}
+	);
 	const duplicate = () => {
 		message.success("执行复制");
 	};
@@ -43,7 +60,7 @@ const QuestionCard: FC<PropsType> = (props: PropsType) => {
 						to={isPublished ? `/question/stat/${_id}` : `/question/edit/${_id}`}
 					>
 						<Space>
-							{isStar && <StarOutlined style={{ color: "red" }} />}
+							{isStarState && <StarOutlined style={{ color: "red" }} />}
 							{title}
 						</Space>
 					</Link>
@@ -86,8 +103,14 @@ const QuestionCard: FC<PropsType> = (props: PropsType) => {
 				</div>
 				<div className={styles.right}>
 					<Space>
-						<Button type="text" icon={<StarOutlined />} size="small">
-							{isStar ? "取消星标" : "标星"}
+						<Button
+							type="text"
+							icon={<StarOutlined />}
+							size="small"
+							onClick={changeStar}
+							disabled={ChangeStartLoading}
+						>
+							{isStarState ? "取消星标" : "标星"}
 						</Button>
 						<Popconfirm
 							title="是否要复制问卷"

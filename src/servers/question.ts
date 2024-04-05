@@ -27,3 +27,13 @@ export async function getQuestionListService(
 	const data = (await axios.get(url, { params: opt })) as ResDataType;
 	return data;
 }
+//更新问卷信息
+//MARK:opt: { [key: string]: any },一个对象类型，键是字符串类型，值是任意类型。
+export async function updateQuestionService(
+	id: string,
+	opt: { [key: string]: any }
+): Promise<ResDataType> {
+	const url = `/api/question/${id}`;
+	const data = (await axios.patch(url, opt)) as ResDataType;
+	return data;
+}
