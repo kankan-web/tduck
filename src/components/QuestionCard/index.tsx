@@ -54,14 +54,27 @@ const QuestionCard: FC<PropsType> = (props: PropsType) => {
 			}
 		}
 	);
-
+	//删除问卷
+	const [isDeletedState, setIsDeletedState] = useState(false);
+	const { loading: deleteLoading, run: deleteQuestion } = useRequest(
+		async () => await updateQuestionService(_id, { isDeleted: true }),
+		{
+			manual: true,
+			onSuccess() {
+				message.success("删除成功");
+				setIsDeletedState(true);
+			}
+		}
+	);
+	//如果已经删除的问卷，那么就不要再渲染卡片了
+	if (isDeletedState) return null;
 	const del = () => {
 		confirm({
 			title: "确定删除问卷？",
 			okText: "删除",
 			cancelText: "取消",
 			icon: <ExclamationCircleOutlined />,
-			onOk: () => message.success("执行删除"),
+			onOk: deleteQuestion,
 			onCancel: () => message.info("取消删除")
 		});
 	};
@@ -146,6 +159,7 @@ const QuestionCard: FC<PropsType> = (props: PropsType) => {
 							icon={<DeleteOutlined />}
 							size="small"
 							onClick={del}
+							disabled={deleteLoading}
 						>
 							删除
 						</Button>
