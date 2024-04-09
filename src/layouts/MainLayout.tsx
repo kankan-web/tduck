@@ -5,10 +5,12 @@ import styles from "./MainLayout.module.scss";
 import Logo from "../components/Logo/index";
 import UserInfo from "../components/UserInfo";
 import useLoadUserData from "../hooks/useLoadUserData";
+import useNavPage from "../hooks/useNavPage";
 const { Header, Footer, Sider, Content } = Layout;
 
 const MainLayout: FC = () => {
 	const { waitingState } = useLoadUserData();
+	useNavPage(waitingState);
 	return (
 		<Layout>
 			<Header className={styles.header}>

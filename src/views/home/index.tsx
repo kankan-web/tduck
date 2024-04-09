@@ -1,7 +1,7 @@
 import React, { FC, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Typography } from "antd";
-import { MANAGE_INDEX_PATHNAME } from "../../routers";
+import { MANAGE_INDEX_PATHNAME } from "../../routers/constant";
 import styles from "./index.module.scss";
 import axios from "axios";
 const { Title, Paragraph } = Typography;

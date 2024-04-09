@@ -4,7 +4,7 @@ import { Space, Typography } from "antd";
 import { FormOutlined } from "@ant-design/icons";
 import styles from "./index.module.scss";
 import useGetUserInfo from "../../hooks/useGetUserInfo";
-import { HOME_PATHNAME, MANAGE_INDEX_PATHNAME } from "../../routers/index";
+import { HOME_PATHNAME, MANAGE_INDEX_PATHNAME } from "../../routers/constant";
 const { Title } = Typography;
 const Logo: FC = () => {
 	const { username } = useGetUserInfo();

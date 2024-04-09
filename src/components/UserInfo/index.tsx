@@ -7,7 +7,7 @@ import { UserOutlined } from "@ant-design/icons";
 
 import styles from "./index.module.scss";
 
-import { LOGIN_PATHNAME } from "../../routers/index";
+import { LOGIN_PATHNAME } from "../../routers/constant";
 // import { getUserInfoService } from "../../servers/user";
 import { removeToken } from "../../util/user-token";
 import useGetUserInfo from "../../hooks/useGetUserInfo";

@@ -3,7 +3,7 @@ import { Space, Typography, Form, Input, Button, message } from "antd";
 import { Link } from "react-router-dom";
 import { UserAddOutlined } from "@ant-design/icons";
 import styles from "./index.module.scss";
-import { LOGIN_PATHNAME } from "../../../routers";
+import { LOGIN_PATHNAME } from "../../../routers/constant";
 import { useRequest } from "ahooks";
 import { registerService } from "../../../servers/user";
 const { Title } = Typography;

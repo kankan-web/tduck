@@ -11,10 +11,10 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import { UserAddOutlined } from "@ant-design/icons";
 import styles from "./index.module.scss";
-import { REGISTER_PATHNAME } from "../../../routers";
+import { REGISTER_PATHNAME } from "../../../routers/constant";
 import { useRequest } from "ahooks";
 import { loginService } from "../../../servers/user";
-import { MANAGE_INDEX_PATHNAME } from "../../../routers/index";
+import { MANAGE_INDEX_PATHNAME } from "../../../routers/constant";
 import { setToken } from "../../../util/user-token";
 const { Title } = Typography;
 
