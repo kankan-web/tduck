@@ -12,7 +12,7 @@ function useLoadUserData() {
 	const { run } = useRequest(getUserInfoService, {
 		manual: true,
 		onSuccess: res => {
-			const { username, nickname } = res.data;
+			const { username, nickname } = res;
 			dispatch(loginReducer({ username, nickname })); //存储到redux store中
 		},
 		onFinally: () => {
