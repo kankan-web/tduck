@@ -23,7 +23,8 @@ const QuestionTitle: FC<QuestionTitlePropsType> = (
 			level={level}
 			style={{
 				textAlign: isCenter ? "center" : "start",
-				fontSize: getFontSize(level)
+				fontSize: getFontSize(level),
+				margin: 0
 			}}
 		>
 			{text}

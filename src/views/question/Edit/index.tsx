@@ -1,8 +1,10 @@
 import React, { FC, useEffect } from "react";
 import useLoadQuestioin from "../../../hooks/useLoadQuestion";
 import styles from "./index.module.scss";
+import EditCanvas from "./EditCanvas";
+
 const Edit: FC = () => {
-	const { loading, data } = useLoadQuestioin();
+	// const { loading, data } = useLoadQuestioin();
 
 	return (
 		<div className={styles.container}>
@@ -12,7 +14,7 @@ const Edit: FC = () => {
 					<div className={styles.left}>Left</div>
 					<div className={styles.main}>
 						<div className={styles["canvas-wrapper"]}>
-							<div style={{ height: "900px" }}>画布，测试滚动</div>
+							<EditCanvas />
 						</div>
 					</div>
 					<div className={styles.right}>Right</div>
