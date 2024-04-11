@@ -1,9 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
-import userReducer from "./userReducer";
 import { StateType } from "./type";
+import userReducer from "./userReducer";
+import componentsReducer from "./componentsReducer";
+
 export default configureStore<StateType>({
 	reducer: {
-		user: userReducer
-		//分模块，扩展：问卷信息
+		user: userReducer,
+		components: componentsReducer
+		//组件列表 （复杂，undo/redo）
+		//问卷信息 title desc...
 	}
 });

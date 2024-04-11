@@ -1,6 +1,10 @@
+/**
+ * @description 废弃，改用useLoadQuestionData
+ */
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getQuestionService } from "../servers/question";
+
 import { useRequest } from "ahooks";
 function useLoadQuestion() {
 	const { id = "" } = useParams();
