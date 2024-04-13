@@ -1,9 +1,12 @@
-import React, { FC } from "react";
+import React, { FC, MouseEvent } from "react";
 import { Spin } from "antd";
+import { useDispatch } from "react-redux";
+import classNames from "classnames";
 import styles from "./editCanvas.module.scss";
-import useGetComponentInfo from "../../../hooks/useGetComponentInfo";
-import { ComponentsInfoType } from "../../../stores/componentsReducer";
-import { getComponentConfigByType } from "../../../components/QuestionComponent";
+import useGetComponentInfo from "../../../../hooks/useGetComponentInfo";
+import { ComponentsInfoType } from "../../../../stores/componentsReducer";
+import { getComponentConfigByType } from "../../../../components/QuestionComponent";
+import { changeSelectedId } from "../../../../stores/componentsReducer";
 
 //临时静态展示一下 Title Input的效果
 // import QuestionInput from "../../../components/QuestionComponent/QuestionInput/Component";
@@ -13,7 +16,6 @@ type PropsType = {
 };
 
 function getComponent(componentInfo: ComponentsInfoType) {
-	console.log("组件结果是：", componentInfo);
 	const { type, props } = componentInfo;
 	const componentConf = getComponentConfigByType(type);
 	if (componentConf == null) return null;
@@ -22,10 +24,16 @@ function getComponent(componentInfo: ComponentsInfoType) {
 }
 
 const EditCanvas: FC<PropsType> = ({ loading }) => {
-	const { componentList } = useGetComponentInfo();
+	const { componentList, selectedId } = useGetComponentInfo();
+	const dispatch = useDispatch();
+
+	function handleClick(event: MouseEvent, id: string) {
+		event.stopPropagation();
+		dispatch(changeSelectedId(id));
+	}
 	if (loading) {
 		return (
-			<div>
+			<div style={{ textAlign: "center", marginTop: "24px" }}>
 				<Spin />
 			</div>
 		);
@@ -34,8 +42,19 @@ const EditCanvas: FC<PropsType> = ({ loading }) => {
 		<div className={styles.canvas}>
 			{componentList.map(c => {
 				const { fe_id } = c;
+				//拼接class name
+				const wrapperDefaultClassName = styles["component-wrapper"];
+				const selectedClassName = styles.selected;
+				const wrapperClassName = classNames({
+					[wrapperDefaultClassName]: true,
+					[selectedClassName]: fe_id === selectedId
+				});
 				return (
-					<div key={fe_id} className={styles["component-wrapper"]}>
+					<div
+						key={fe_id}
+						className={wrapperClassName}
+						onClick={e => handleClick(e, fe_id)}
+					>
 						<div className={styles.component}>{getComponent(c)}</div>
 					</div>
 				);
