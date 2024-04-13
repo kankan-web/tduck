@@ -16,6 +16,7 @@ import {
 	duplicateQuestionService
 } from "../../servers/question";
 type PropsType = {
+	//MARK:服务端mongodb会自动生成_id，且不会重复。创建问卷这个主要是服务端来实现
 	_id: string; // 服务端 mongodb ，自动，_id 不重复
 	title: string;
 	isStar: boolean;

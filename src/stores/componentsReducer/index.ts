@@ -3,6 +3,7 @@ import { produce } from "immer";
 import { ComponentPropsType } from "../../components/QuestionComponent";
 
 export type ComponentsInfoType = {
+	//MARK:前端生成的id，服务端Mongodb不认这种格式，所以自定义一个fe_id
 	fe_id: string; //TODO
 	type: string;
 	title: string;
