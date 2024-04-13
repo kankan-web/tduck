@@ -33,8 +33,28 @@ export const componentsSlice = createSlice({
 			(draft: ComponentsStateType, action: PayloadAction<string>) => {
 				draft.selectedId = action.payload;
 			}
+		),
+		//添加组件
+		addComponent: produce(
+			(
+				draft: ComponentsStateType,
+				action: PayloadAction<ComponentsInfoType>
+			) => {
+				const newComponent = action.payload;
+				const { selectedId, componentList } = draft;
+				const index = componentList.findIndex(c => c.fe_id === selectedId);
+				if (index < 0) {
+					//未选中任何组件
+					draft.componentList.push(newComponent);
+				} else {
+					//选中了组件，插入到index后面
+					draft.componentList.splice(index + 1, 0, newComponent);
+				}
+				draft.selectedId = newComponent.fe_id;
+			}
 		)
 	}
 });
-export const { resetComponent, changeSelectedId } = componentsSlice.actions;
+export const { resetComponent, changeSelectedId, addComponent } =
+	componentsSlice.actions;
 export default componentsSlice.reducer;

@@ -1,16 +1,31 @@
 import { FC } from "react";
 import { Typography } from "antd";
+import { useDispatch } from "react-redux";
+import { nanoid } from "nanoid";
 import {
 	componentConfigGroup,
 	ComponentConfigType
 } from "../../../../../components/QuestionComponent";
+import { addComponent } from "../../../../../stores/componentsReducer";
 import styles from "./ComponentLib.module.scss";
 
 const { Title } = Typography;
 function getComponent(c: ComponentConfigType) {
-	const { title, type, Component } = c;
+	const { title, type, Component, defaultProps } = c;
+	const dispatch = useDispatch();
+
+	function handleClick() {
+		dispatch(
+			addComponent({
+				fe_id: nanoid(),
+				title,
+				type,
+				props: defaultProps
+			})
+		);
+	}
 	return (
-		<div className={styles.wrapper}>
+		<div key={type} className={styles.wrapper} onClick={handleClick}>
 			<div className={styles.component}>
 				<Component />
 			</div>
