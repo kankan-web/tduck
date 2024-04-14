@@ -5,6 +5,7 @@ import styles from "./index.module.scss";
 import EditCanvas from "./EditCanvas/EditCanvas";
 import LeftPanel from "./LeftPanel/LeftPanel";
 import RightPanel from "./RightPanel/RightPanel";
+import EditHeader from "./EditHeader/EditHeader";
 import { useDispatch } from "react-redux";
 import { changeSelectedId } from "../../../stores/componentsReducer";
 
@@ -18,7 +19,7 @@ const Edit: FC = () => {
 
 	return (
 		<div className={styles.container}>
-			<div style={{ backgroundColor: "#fff" }}>Header</div>
+			<EditHeader />
 			<div className={styles["content-wrapper"]}>
 				<div className={styles.content}>
 					<div className={styles.left}>

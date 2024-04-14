@@ -2,7 +2,7 @@ import React, { FC, MouseEvent } from "react";
 import { Spin } from "antd";
 import { useDispatch } from "react-redux";
 import classNames from "classnames";
-import styles from "./editCanvas.module.scss";
+import styles from "./EditCanvas.module.scss";
 import useGetComponentInfo from "../../../../hooks/useGetComponentInfo";
 import { ComponentsInfoType } from "../../../../stores/componentsReducer";
 import { getComponentConfigByType } from "../../../../components/QuestionComponent";
