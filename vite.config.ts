@@ -1,3 +1,4 @@
+import path from "path";
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
@@ -11,6 +12,12 @@ export default defineConfig({
 				changeOrigin: true,
 				rewrite: path => path.replace(/^\/api/, "/api")
 			}
+		}
+	},
+	resolve: {
+		//路径别名设置：vite
+		alias: {
+			"@": path.resolve(__dirname, "src")
 		}
 	}
 });
