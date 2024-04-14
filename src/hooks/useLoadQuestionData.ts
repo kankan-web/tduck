@@ -31,7 +31,9 @@ function useLoadQuestionData() {
 			selectedId = componentList[0].fe_id; //默认选中第一个组件
 		}
 
-		dispatch(resetComponent({ componentList, selectedId }));
+		dispatch(
+			resetComponent({ componentList, selectedId, copiedComponent: null })
+		);
 	}, [data]);
 
 	//判断id变化，执行ajax加载问卷数据
