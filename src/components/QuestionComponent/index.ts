@@ -12,6 +12,7 @@ export type ComponentConfigType = {
 	type: string;
 	//MARK:通过这种方式来定义组件数据的类型
 	Component: FC<ComponentPropsType>;
+	PropComponent: FC<ComponentPropsType>;
 	defaultProps: ComponentPropsType;
 };
 
