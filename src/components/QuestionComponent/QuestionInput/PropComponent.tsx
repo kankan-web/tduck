@@ -4,7 +4,7 @@ import { QuestionInputPropsType } from "./type";
 const PropComponent: FC<QuestionInputPropsType> = (
 	props: QuestionInputPropsType
 ) => {
-	const { title, placeholder, onChange } = props;
+	const { title, placeholder, onChange, disabled } = props;
 	const [form] = Form.useForm();
 	useEffect(() => {
 		form.setFieldsValue({ title, placeholder });
@@ -20,6 +20,7 @@ const PropComponent: FC<QuestionInputPropsType> = (
 			initialValues={{ title, placeholder }}
 			form={form}
 			onValuesChange={handleValueChange}
+			disabled={disabled}
 		>
 			<Form.Item
 				label="标题"

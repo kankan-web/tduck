@@ -8,7 +8,8 @@ export type ComponentsInfoType = {
 	fe_id: string; //TODO
 	type: string;
 	title: string;
-	isHidden: boolean;
+	isHidden?: boolean;
+	isLocked?: boolean;
 	props: ComponentPropsType;
 };
 export type ComponentsStateType = {
@@ -109,6 +110,20 @@ export const componentsSlice = createSlice({
 					curComp.isHidden = isHidden;
 				}
 			}
+		),
+		//锁定/解锁 组件
+		toggleComponentLocked: produce(
+			(
+				draft: ComponentsStateType,
+				action: PayloadAction<{ fe_id: string }>
+			) => {
+				const { fe_id } = action.payload;
+
+				const curComp = draft.componentList.find(c => c.fe_id === fe_id);
+				if (curComp) {
+					curComp.isLocked = !curComp.isLocked;
+				}
+			}
 		)
 	}
 });
@@ -118,6 +133,7 @@ export const {
 	addComponent,
 	changeComponentProps,
 	removeSelectedComponent,
-	changeComponentHidden
+	changeComponentHidden,
+	toggleComponentLocked
 } = componentsSlice.actions;
 export default componentsSlice.reducer;
