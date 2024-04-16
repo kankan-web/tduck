@@ -5,12 +5,16 @@ import QuestionParagraphConfig, {
 	QuestionParagraphPropsType
 } from "./QuestionParagraph";
 import QuestionInfoConfig, { QuestionInfoPropsType } from "./QuestionInfo";
+import QUestionTextAreaConfig, {
+	QuestionTextAreaPropsType
+} from "./QuestionTextarea";
 
 //统一，各个组件的prop type
 export type ComponentPropsType = QuestionInputPropsType &
 	QuestionTitlePropsType &
 	QuestionParagraphPropsType &
-	QuestionInfoPropsType;
+	QuestionInfoPropsType &
+	QuestionTextAreaPropsType;
 
 //统一，组件的配置
 export type ComponentConfigType = {
@@ -27,7 +31,8 @@ const componentConfigList: ComponentConfigType[] = [
 	QuestionInputConfig,
 	QuestionTitleConfig,
 	QuestionParagraphConfig,
-	QuestionInfoConfig
+	QuestionInfoConfig,
+	QUestionTextAreaConfig
 ];
 //组件分组
 export const componentConfigGroup = [
@@ -43,7 +48,7 @@ export const componentConfigGroup = [
 	{
 		groupId: "inputGroup",
 		groupName: "用户输入",
-		components: [QuestionInputConfig]
+		components: [QuestionInputConfig, QUestionTextAreaConfig]
 	}
 ];
 
