@@ -7,6 +7,7 @@ import useGetComponentInfo from "../../../../hooks/useGetComponentInfo";
 import { ComponentsInfoType } from "../../../../stores/componentsReducer";
 import { getComponentConfigByType } from "../../../../components/QuestionComponent";
 import { changeSelectedId } from "../../../../stores/componentsReducer";
+import useBindCanvasKeyPress from "@/hooks/useBindCanvasKeyPress.ts";
 
 //临时静态展示一下 Title Input的效果
 // import QuestionInput from "../../../components/QuestionComponent/QuestionInput/Component";
@@ -26,6 +27,9 @@ function getComponent(componentInfo: ComponentsInfoType) {
 const EditCanvas: FC<PropsType> = ({ loading }) => {
 	const { componentList, selectedId } = useGetComponentInfo();
 	const dispatch = useDispatch();
+
+	//绑定快捷键
+	useBindCanvasKeyPress();
 
 	function handleClick(event: MouseEvent, id: string) {
 		event.stopPropagation();
