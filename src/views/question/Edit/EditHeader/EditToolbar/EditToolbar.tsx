@@ -43,6 +43,7 @@ const EditToolbar: FC = () => {
 	function paste() {
 		dispatch(pasteCopiedComponent());
 	}
+	//TODO：撤销、重做
 	return (
 		<Space>
 			<Tooltip title="删除">
