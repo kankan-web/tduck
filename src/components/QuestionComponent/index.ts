@@ -9,6 +9,9 @@ import QuestionTextAreaConfig, {
 	QuestionTextAreaPropsType
 } from "./QuestionTextarea";
 import QuestionRadioConfig, { QuestionRadioPropsType } from "./QuestionRadio";
+import QuestionCheckboxConfig, {
+	QuestionCheckboxPropsType
+} from "./QuestionCheckbox";
 
 //统一，各个组件的prop type
 export type ComponentPropsType = QuestionInputPropsType &
@@ -16,7 +19,8 @@ export type ComponentPropsType = QuestionInputPropsType &
 	QuestionParagraphPropsType &
 	QuestionInfoPropsType &
 	QuestionTextAreaPropsType &
-	QuestionRadioPropsType;
+	QuestionRadioPropsType &
+	QuestionCheckboxPropsType;
 
 //统一，组件的配置
 export type ComponentConfigType = {
@@ -35,7 +39,8 @@ const componentConfigList: ComponentConfigType[] = [
 	QuestionParagraphConfig,
 	QuestionInfoConfig,
 	QuestionTextAreaConfig,
-	QuestionRadioConfig
+	QuestionRadioConfig,
+	QuestionCheckboxConfig
 ];
 
 //组件分组
@@ -57,7 +62,7 @@ export const componentConfigGroup = [
 	{
 		groupId: "chooseGroup",
 		groupName: "选择",
-		components: [QuestionRadioConfig]
+		components: [QuestionRadioConfig, QuestionCheckboxConfig]
 	}
 ];
 
