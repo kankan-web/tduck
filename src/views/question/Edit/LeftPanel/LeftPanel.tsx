@@ -2,7 +2,7 @@ import { FC } from "react";
 import { Tabs } from "antd";
 import { AppstoreOutlined, BarsOutlined } from "@ant-design/icons";
 import Lib from "./ComponentLib/ComponentLib";
-import Layers from "../Layers/Layers";
+import Layers from "./Layers/Layers";
 
 const LeftPanel: FC = () => {
 	const tabsItems = [
