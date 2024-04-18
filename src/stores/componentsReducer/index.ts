@@ -157,7 +157,18 @@ export const componentsSlice = createSlice({
 			if (selectedIndex < 0) return; //未选中组件
 			if (selectedIndex + 1 === componentList.length) return; //选中了最后一个
 			draft.selectedId = componentList[selectedIndex + 1].fe_id;
-		})
+		}),
+		//修改组件标题
+		changeComponentTitle: produce(
+			(
+				draft: ComponentsStateType,
+				action: PayloadAction<{ fe_id: string; title: string }>
+			) => {
+				const { title, fe_id } = action.payload;
+				const curComp = draft.componentList.find(c => c.fe_id === fe_id);
+				if (curComp) curComp.title = title;
+			}
+		)
 	}
 });
 export const {
@@ -171,6 +182,7 @@ export const {
 	copySelectComponent,
 	pasteCopiedComponent,
 	selectPrevComponent,
-	selectNextComponent
+	selectNextComponent,
+	changeComponentTitle
 } = componentsSlice.actions;
 export default componentsSlice.reducer;
