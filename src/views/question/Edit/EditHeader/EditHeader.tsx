@@ -8,7 +8,7 @@ import EditToolbar from "./EditToolbar/EditToolbar";
 import useGetPageInfo from "@/hooks/useGetPageInfo";
 import { changePageTitle } from "@/stores/pageInfoReducer";
 import useGetComponentInfo from "@/hooks/useGetComponentInfo";
-import { useKeyPress, useRequest } from "ahooks";
+import { useDebounceEffect, useKeyPress, useRequest } from "ahooks";
 import { updateQuestionService } from "@/servers/question";
 
 const { Title } = Typography;
@@ -63,6 +63,14 @@ const SaveButton: FC = () => {
 	useKeyPress(["ctrl.s", "meta.s"], (event: KeyboardEvent) => {
 		if (!loading) save();
 	});
+	//#MARK:自动保存（不是定期保存，不是定时器）
+	useDebounceEffect(
+		() => {
+			save();
+		},
+		[componentList, pageInfo],
+		{ wait: 1000 }
+	);
 	return (
 		<Button
 			onClick={save}
