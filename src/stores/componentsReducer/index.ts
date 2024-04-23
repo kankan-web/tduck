@@ -4,6 +4,7 @@ import { nanoid } from "nanoid";
 import { ComponentPropsType } from "../../components/QuestionComponent";
 import { getNextSelectedId, insertNewComponent } from "./util";
 import cloneDeep from "lodash.clonedeep";
+import { arrayMove } from "@dnd-kit/sortable";
 
 export type ComponentsInfoType = {
 	//MARK:前端生成的id，服务端Mongodb不认这种格式，所以自定义一个fe_id
@@ -168,6 +169,17 @@ export const componentsSlice = createSlice({
 				const curComp = draft.componentList.find(c => c.fe_id === fe_id);
 				if (curComp) curComp.title = title;
 			}
+		),
+		//移动组件
+		moveComponent: produce(
+			(
+				draft: ComponentsStateType,
+				action: PayloadAction<{ oldIndex: number; newIndex: number }>
+			) => {
+				const { componentList: curComponentList } = draft;
+				const { oldIndex, newIndex } = action.payload;
+				draft.componentList = arrayMove(curComponentList, oldIndex, newIndex);
+			}
 		)
 	}
 });
@@ -183,6 +195,7 @@ export const {
 	pasteCopiedComponent,
 	selectPrevComponent,
 	selectNextComponent,
-	changeComponentTitle
+	changeComponentTitle,
+	moveComponent
 } = componentsSlice.actions;
 export default componentsSlice.reducer;
