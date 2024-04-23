@@ -1,0 +1,4 @@
+/* dnd-kit 拖拽排序 */
+div[role="button"] {
+  outline: 0;
+}

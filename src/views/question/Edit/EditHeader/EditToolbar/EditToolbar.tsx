@@ -6,7 +6,9 @@ import {
 	LockOutlined,
 	UnlockOutlined,
 	CopyOutlined,
-	BlockOutlined
+	BlockOutlined,
+	UpOutlined,
+	DownOutlined
 } from "@ant-design/icons";
 import { useDispatch } from "react-redux";
 import {
@@ -14,15 +16,23 @@ import {
 	changeComponentHidden,
 	toggleComponentLocked,
 	copySelectComponent,
-	pasteCopiedComponent
+	pasteCopiedComponent,
+	moveComponent
 } from "@/stores/componentsReducer";
 import useGetComponentInfo from "@/hooks/useGetComponentInfo";
 
 const EditToolbar: FC = () => {
 	const dispatch = useDispatch();
-	const { selectedId, selectedComponent, copiedComponent } =
+	const { selectedId, selectedComponent, copiedComponent, componentList } =
 		useGetComponentInfo();
 	const { isLocked } = selectedComponent || {};
+	const length = componentList.length;
+	const selectedIndex = componentList.findIndex(
+		item => item.fe_id === selectedId
+	);
+	const isFirst = selectedIndex <= 0; //第一个
+	const isLast = selectedIndex >= length - 1; //最后一个
+
 	//删除组件
 	function handleDelete() {
 		dispatch(removeSelectedComponent());
@@ -42,6 +52,20 @@ const EditToolbar: FC = () => {
 	//粘贴组件
 	function paste() {
 		dispatch(pasteCopiedComponent());
+	}
+	//上移组件
+	function moveUp() {
+		if (isFirst) return;
+		dispatch(
+			moveComponent({ oldIndex: selectedIndex, newIndex: selectedIndex - 1 })
+		);
+	}
+	//下移组件
+	function moveDown() {
+		if (isLast) return;
+		dispatch(
+			moveComponent({ oldIndex: selectedIndex, newIndex: selectedIndex + 1 })
+		);
 	}
 	//TODO：撤销、重做
 	return (
@@ -77,6 +101,22 @@ const EditToolbar: FC = () => {
 					icon={<BlockOutlined />}
 					onClick={paste}
 					disabled={copiedComponent == null}
+				></Button>
+			</Tooltip>
+			<Tooltip title="上移">
+				<Button
+					shape="circle"
+					icon={<UpOutlined />}
+					onClick={moveUp}
+					disabled={isFirst}
+				></Button>
+			</Tooltip>
+			<Tooltip title="下移">
+				<Button
+					shape="circle"
+					icon={<DownOutlined />}
+					onClick={moveDown}
+					disabled={isLast}
 				></Button>
 			</Tooltip>
 		</Space>

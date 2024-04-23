@@ -10,6 +10,7 @@ import {
 function isActiveElementValid() {
 	const activeElement = document.activeElement;
 	if (activeElement === document.body) return true; //光标没有focus到input上
+	if (activeElement?.matches('div[role="button"]')) return true; //增加了dnd-kit之后
 	return false;
 }
 function useBindCanvasKeyPress() {
