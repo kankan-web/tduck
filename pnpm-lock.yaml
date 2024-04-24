@@ -53,6 +53,9 @@ dependencies:
   redux:
     specifier: ^5.0.1
     version: 5.0.1
+  redux-undo:
+    specifier: ^1.1.0
+    version: 1.1.0
 
 devDependencies:
   '@types/lodash.clonedeep':
@@ -4358,6 +4361,10 @@ packages:
       redux: ^5.0.0
     dependencies:
       redux: 5.0.1
+    dev: false
+
+  /redux-undo@1.1.0:
+    resolution: {integrity: sha512-zzLFh2qeF0MTIlzDhDLm9NtkfBqCllQJ3OCuIl5RKlG/ayHw6GUdIFdMhzMS9NnrnWdBX5u//ExMOHpfudGGOg==}
     dev: false
 
   /redux@5.0.1:
