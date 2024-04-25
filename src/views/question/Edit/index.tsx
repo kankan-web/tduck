@@ -7,11 +7,16 @@ import LeftPanel from "./LeftPanel/LeftPanel";
 import RightPanel from "./RightPanel/RightPanel";
 import EditHeader from "./EditHeader/EditHeader";
 import { useDispatch } from "react-redux";
-import { changeSelectedId } from "../../../stores/componentsReducer";
+import { useTitle } from "ahooks";
+import { changeSelectedId } from "@/stores/componentsReducer";
+import useGetPageInfo from "@/hooks/useGetPageInfo";
 
 const Edit: FC = () => {
 	// const { loading, error } = useLoadQuestioin();
 	const { loading, error } = useLoadQuestionData();
+	const { title } = useGetPageInfo();
+	useTitle(`问卷编辑 - ${title}`);
+
 	const dispatch = useDispatch();
 	function clearSelectedId() {
 		dispatch(changeSelectedId(""));
