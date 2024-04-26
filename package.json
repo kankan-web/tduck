@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "test": "vitest",
     "build": "tsc && vite build",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx --fix --quiet ./",
     "preview": "vite preview",
@@ -36,12 +37,19 @@
     "redux-undo": "^1.1.0"
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.24.4",
+    "@babel/preset-react": "^7.24.1",
+    "@testing-library/jest-dom": "^6.4.2",
+    "@testing-library/react": "^15.0.4",
+    "@testing-library/user-event": "^14.5.2",
     "@types/lodash.clonedeep": "^4.5.9",
     "@types/react": "^18.2.64",
     "@types/react-dom": "^18.2.21",
+    "@types/react-test-renderer": "^18.3.0",
     "@typescript-eslint/eslint-plugin": "^7.2.0",
     "@typescript-eslint/parser": "^7.2.0",
     "@vitejs/plugin-react": "^4.2.1",
+    "@vitest/ui": "^1.5.2",
     "commitizen": "^4.3.0",
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "^8.57.0",
@@ -52,11 +60,14 @@
     "eslint-plugin-react-refresh": "^0.4.5",
     "husky": "^9.0.11",
     "immer": "^10.0.4",
+    "jsdom": "^24.0.0",
     "lint-staged": "^15.2.2",
     "prettier": "^3.2.5",
+    "react-test-renderer": "^18.3.0",
     "sass": "^1.72.0",
     "typescript": "^5.2.2",
-    "vite": "^5.1.6"
+    "vite": "^5.1.6",
+    "vitest": "^1.5.2"
   },
   "config": {
     "commitizen": {
