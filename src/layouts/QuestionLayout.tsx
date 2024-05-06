@@ -11,10 +11,8 @@ const QuestionLayout: FC = () => {
 			{waitingState ? (
 				<div
 					style={{
-						height: "100%",
-						display: "flex",
-						justifyContent: "center",
-						alignItems: "center"
+						textAlign: "center",
+						marginTop: "60px"
 					}}
 				>
 					<Spin />

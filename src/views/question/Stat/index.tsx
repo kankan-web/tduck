@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTitle } from "ahooks";
 import { Spin, Result, Button } from "antd";
@@ -6,11 +6,15 @@ import useLoadQuestionData from "@/hooks/useLoadQuestionData";
 import useGetPageInfo from "@/hooks/useGetPageInfo";
 import styles from "./index.module.scss";
 import StatHeader from "./StatHeader/StatHeader";
-
+import ComponentList from "./ComponentList/ComponentList";
 const Stat: FC = () => {
 	const nav = useNavigate();
 	const { loading } = useLoadQuestionData();
 	const { isPublished, title } = useGetPageInfo();
+	//状态提升 selectedId type
+	const [selectedComponentId, setSelectedComponentId] = useState("");
+	const [selectedComponentType, setSelectedComponentType] = useState("");
+
 	//修改标题
 	useTitle(`问卷统计-${title}`);
 
@@ -39,7 +43,13 @@ const Stat: FC = () => {
 		}
 		return (
 			<>
-				<div className={styles.left}>左侧</div>
+				<div className={styles.left}>
+					<ComponentList
+						selectedComponentId={selectedComponentId}
+						setSelectedComponentId={setSelectedComponentId}
+						setSelectedComponentType={setSelectedComponentType}
+					/>
+				</div>
 				<div className={styles.main}>中间</div>
 				<div className={styles.right}>右侧</div>
 			</>
@@ -47,11 +57,15 @@ const Stat: FC = () => {
 	}
 
 	return (
-		<div className={styles.container}>
+		<div className={styles.container} id="chak1">
 			<StatHeader />
 			<div className={styles["content-wrapper"]}>
 				{loading && loadingElem}
-				{!loading && <div className={styles.content}>{getContentElem()}</div>}
+				{!loading && (
+					<div className={styles.content} id="chis">
+						{getContentElem()}
+					</div>
+				)}
 			</div>
 		</div>
 	);
