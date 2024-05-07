@@ -7,6 +7,8 @@ import useGetPageInfo from "@/hooks/useGetPageInfo";
 import styles from "./index.module.scss";
 import StatHeader from "./StatHeader/StatHeader";
 import ComponentList from "./ComponentList/ComponentList";
+import PageStat from "./PageStat/PageStat";
+
 const Stat: FC = () => {
 	const nav = useNavigate();
 	const { loading } = useLoadQuestionData();
@@ -50,7 +52,13 @@ const Stat: FC = () => {
 						setSelectedComponentType={setSelectedComponentType}
 					/>
 				</div>
-				<div className={styles.main}>中间</div>
+				<div className={styles.main}>
+					<PageStat
+						selectedComponentId={selectedComponentId}
+						setSelectedComponentId={setSelectedComponentId}
+						setSelectedComponentType={setSelectedComponentType}
+					/>
+				</div>
 				<div className={styles.right}>右侧</div>
 			</>
 		);
