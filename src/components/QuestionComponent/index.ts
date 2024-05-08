@@ -38,7 +38,7 @@ export type ComponentConfigType = {
 	Component: FC<ComponentPropsType>;
 	PropComponent: FC<ComponentPropsType>;
 	defaultProps: ComponentPropsType;
-	statComponent?: FC<ComponentStatPropsType>;
+	StatComponent?: FC<ComponentStatPropsType>;
 };
 
 //全部的组件配置的列表

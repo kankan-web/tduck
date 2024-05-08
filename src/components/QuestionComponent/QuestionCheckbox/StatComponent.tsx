@@ -12,7 +12,7 @@ import {
 } from "recharts";
 import { QuestionCheckboxStatPropsType } from "./type";
 
-const BarDemo: FC<QuestionCheckboxStatPropsType> = ({ stat = [] }) => {
+const StatComponent: FC<QuestionCheckboxStatPropsType> = ({ stat = [] }) => {
 	return (
 		<div style={{ width: "300px", height: "400px" }}>
 			<ResponsiveContainer width="100%" height="100%">
@@ -43,4 +43,4 @@ const BarDemo: FC<QuestionCheckboxStatPropsType> = ({ stat = [] }) => {
 		</div>
 	);
 };
-export default BarDemo;
+export default StatComponent;

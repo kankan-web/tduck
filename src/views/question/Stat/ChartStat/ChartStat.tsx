@@ -5,6 +5,7 @@ import { useRequest } from "ahooks";
 import PieDemo from "../PieDemo";
 import BarDemo from "../BarDemo";
 import { getComponentStatService } from "@/servers/stat";
+import { getComponentConfigByType } from "@/components/QuestionComponent";
 const { Title } = Typography;
 type PropType = {
 	selectedComponentId: string;
@@ -32,7 +33,10 @@ const ChartStat: FC<PropType> = (props: PropType) => {
 
 	function getStatElem() {
 		if (!selectedComponentId) return <div>未选中组件</div>;
-		return <div>{JSON.stringify(stat)}</div>;
+		const { StatComponent } =
+			getComponentConfigByType(selectedComponentType) || {};
+		if (StatComponent == null) return <div>该组件无统计图表</div>;
+		return <StatComponent stat={stat}></StatComponent>;
 	}
 	return (
 		<>
