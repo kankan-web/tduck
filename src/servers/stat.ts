@@ -8,3 +8,11 @@ export async function getQuestionStatListService(
 	const data = (await axios.get(url, { params: opt })) as ResDataType;
 	return data;
 }
+export async function getComponentStatService(
+	questionId: string,
+	componetId: string
+): Promise<ResDataType> {
+	const url = `/api/stat/${questionId}/${componetId}`;
+	const data = (await axios.get(url)) as ResDataType;
+	return data;
+}

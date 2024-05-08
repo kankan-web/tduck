@@ -1,3 +1,4 @@
+import StatComponent from "../QuestionRadio/StatComponent";
 import Component from "./Component";
 import PropComponent from "./PropComponent";
 import { QuestionCheckboxDefaultProps } from "./type";
@@ -9,5 +10,6 @@ export default {
 	type: "questionCheckbox",
 	Component,
 	PropComponent,
-	defaultProps: QuestionCheckboxDefaultProps
+	defaultProps: QuestionCheckboxDefaultProps,
+	StatComponent
 };
